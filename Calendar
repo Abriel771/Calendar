@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>March</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		th, td {
+			border: 1px solid black;
+			padding: 10px;
+			text-align: center;
+		}
+		th {
+			background-color: rgb(7, 241, 39);
+		}
+	</style>
+</head>
+<body>
+	<h1>Month of March</h1>
+	<style>h1
+	{color: blue;}
+	</style>
+	<table>
+		<thead>
+			<tr>
+				<th>Sun</th>
+				<th>Mon</th>
+				<th>Tue</th>
+				<th>Wed</th>
+				<th>Thu</th>
+				<th>Fri</th>
+				<th>Sat</th>
+			</tr>
+		</thead>
+		<tbody id="calendar-body">
+		</tbody>
+	</table>
+	<script>
+		var date = new Date(2023, 2, 1); // Month is zero-based, so 2 is March
+		var year = date.getFullYear();
+		var month = date.getMonth();
+		var daysInMonth = new Date(year, month + 1, 0).getDate();
+		var firstDay = new Date(year, month, 1).getDay(); // Sunday is 0
+
+		var table = document.getElementById("calendar-body");
+		var row = document.createElement("tr");
+
+		for (var i = 0; i < firstDay; i++) {
+			row.appendChild(document.createElement("td"));
+		}
+
+		for (var i = 1; i <= daysInMonth; i++) {
+			var cell = document.createElement("td");
+			cell.innerText = i;
+			row.appendChild(cell);
+			if ((i + firstDay) % 7 == 0) {
+				table.appendChild(row);
+				row = document.createElement("tr");
+			}
+		}
+
+		for (var i = 0; i < 7 - ((daysInMonth + firstDay) % 7); i++) {
+			row.appendChild(document.createElement("td"));
+		}
+
+		table.appendChild(row);
+	</script>
+</body>
+</html>
